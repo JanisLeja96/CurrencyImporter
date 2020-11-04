@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": "App/"
+    }
+  },
+  "require": {
+    "sabre/xml": "^2.2",
+    "doctrine/dbal": "^2.12",
+    "vlucas/phpdotenv": "^5.2"
+  }
+}
