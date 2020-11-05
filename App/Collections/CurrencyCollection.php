@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Collections;
+
+use App\Models\Currency;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Query\QueryBuilder;

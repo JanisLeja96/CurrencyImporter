@@ -1,10 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Controllers;
 
+use App\Models\Currency;
+use App\Collections\CurrencyCollection;
 use Sabre\Xml\Service;
 
-class CurrencyImporter
+class CurrencyController
 {
     private CurrencyCollection $currencyCollection;
     private array $data;
@@ -15,7 +17,7 @@ class CurrencyImporter
         $this->data = $this->getRawData();
     }
 
-    public function getRawData()
+    private function getRawData()
     {
         $service = new Service();
         $result = $service->parse(file_get_contents('https://www.bank.lv/vk/ecb.xml'));
@@ -31,7 +33,7 @@ class CurrencyImporter
         }
     }
 
-    public function getCurrencies(): CurrencyCollection
+    private function getCurrencies(): CurrencyCollection
     {
         return $this->currencyCollection;
     }
@@ -85,5 +87,11 @@ class CurrencyImporter
             ->from('currencies')
             ->execute()
             ->fetchAllAssociative();
+    }
+
+    public function index()
+    {
+        $data = CurrencyController::getFromDatabase();
+        return require_once __DIR__ . '/../Views/IndexView.php';
     }
 }
